@@ -20,6 +20,8 @@ _class Excursionpublica:_
 Se crea una variable excursion de tipo Excursionpublica, y se muestra como se puede acceder y modificar los atributos de excursion sin problema alguno.
 Véase en el código:
 
+Ejecución de la clase pública:
+
 _excursion = Excursionpublica('Puerto Real', 'Jerez')_
 
 _print(excursion.monitor)_

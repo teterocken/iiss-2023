@@ -6,21 +6,41 @@ Este archivo se puede ejecutar al ejecutar la instruccción "python encapsulacio
 Existen 3 clases que implementan exactamente lo mismo, una excursión con un atributo monitor, uno origen y uno destino. Excursionpublica la implementa con atributos publicos, Excursionprotected, con atributos protegidos (o su equivalente en Python, que es escribir el atributo empezando en \_), y Excursionprivada con atributos privados (o su equivalente en Python, que es escribir el atributo empezando en \_\_). Una vez definidas estas clases:
 ## Utilización de la clase con atributos públicos
 Se crea una variable excursion de tipo Excursionpublica, y se muestra como se puede acceder y modificar los atributos de excursion sin problema alguno.
-Vease en el código:
+Véase en el código:
 
 _excursion = Excursionpublica('Puerto Real', 'Jerez')_
-print(excursion.monitor)
 
-print(excursion.destino)
+_print(excursion.monitor)_
 
-excursion.destino = 'Sevilla'
+_print(excursion.destino)_
 
-print(excursion.destino)_
+_excursion.destino = 'Sevilla'_
+
+_print(excursion.destino)_
 
 ## Utilización de la clase con atributos protegidos
 La variable excursión pasa a ser protected y al ejecutar instrucciones de acceso o modificación de sus atributos se contempla que, aunque teóricamente no debiera ser así, Python no restringe el acceso o modificación a las variables protegidas, tan solo existe un weak warning por parte del framework que utilizo para trabajar con Python (por parte del propio intérprete Python no existe ningún problema para ejecutar el código).
+Véase en el código:
+
+_excursion = Excursionprotected('Puerto Real', 'Jerez')_
+
+_print(excursion.\_monitor)_
+
+_print(excursion.\_destino)_
+
+_excursion.\_destino = 'Sevilla'_
+
 ## Utilización de la clase con atributos privados
 Al ejecutar las instrucciones siendo excursion un objeto de la clase Excursionprivada, el intérprete da error al tratar de ejecutar las órdenes de acceso o modificación de atributos privados, de ahí el hecho de que se hallen comentadas.
+Véase en el código (Comentado por los errores que este código causa):
+
+_print(excursion.\_\_monitor)_
+
+_print(excursion.\_\_destino)_
+
+_excursion.\_\_destino = 'Sevilla'_
+
+_print(excursion.\_\_destino)_
 
 
 # Conclusión

@@ -3,7 +3,7 @@ Este archivo se puede ejecutar al ejecutar la instruccción "python encapsulacio
 
 
 # **Explicación del código**
-Existen 3 clases que implementan exactamente lo mismo, una excursión con un atributo monitor, uno origen y uno destino. Excursionpublica la implementa con atributos publicos, Excursionprotected, con atributos protegidos (o su equivalente en Python, que es escribir el atributo empezando en _), y Excursionprivada con atributos privados (o su equivalente en Python, que es escribir el atributo empezando en \__). Una vez definidas estas clases:
+Existen 3 clases que implementan exactamente lo mismo, una excursión con un atributo monitor, uno origen y uno destino. Excursionpublica la implementa con atributos publicos, Excursionprotected, con atributos protegidos (o su equivalente en Python, que es escribir el atributo empezando en \_), y Excursionprivada con atributos privados (o su equivalente en Python, que es escribir el atributo empezando en \_\_). Una vez definidas estas clases:
 ## Utilización de la clase con atributos públicos
 Se crea una variable excursion de tipo Excursionpublica, y se muestra como se puede acceder y modificar los atributos de excursion sin problema alguno. 
 ## Utilización de la clase con atributos protegidos

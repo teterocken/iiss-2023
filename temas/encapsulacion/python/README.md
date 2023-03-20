@@ -8,15 +8,15 @@ El siguiente código representa a la clase Excursionpublica, las otras 2 clases 
 
 ```
 
-_class Excursionpublica:_
+class Excursionpublica:
 
-    _monitor = 'Samuel'_
+    monitor = 'Samuel'
 
-    _def \_\_init\_\_(self, origen, destino):_
+    def \_\_init\_\_(self, origen, destino):
 
-    _self.origen = origen_
+    self.origen = origen
  
-    _self.destino = destino_
+    self.destino = destino
 
 ```
 
@@ -24,42 +24,53 @@ _class Excursionpublica:_
 Se crea una variable excursion de tipo Excursionpublica, y se muestra como se puede acceder y modificar los atributos de excursion sin problema alguno.
 Véase en el código:
 
-_excursion = Excursionpublica('Puerto Real', 'Jerez')_
+```
 
-_print(excursion.monitor)_
+excursion = Excursionpublica('Puerto Real', 'Jerez')
 
-_print(excursion.destino)_
+print(excursion.monitor)
 
-_excursion.destino = 'Sevilla'_
+print(excursion.destino)
 
-_print(excursion.destino)_
+excursion.destino = 'Sevilla'
+
+print(excursion.destino)
+
+```
 
 ## Utilización de la clase con atributos protegidos
 La variable excursión pasa a ser protected y al ejecutar instrucciones de acceso o modificación de sus atributos se contempla que, aunque teóricamente no debiera ser así, Python no restringe el acceso o modificación a las variables protegidas, tan solo existe un weak warning por parte del framework que utilizo para trabajar con Python (por parte del propio intérprete Python no existe ningún problema para ejecutar el código).
 Véase en el código:
 
-_excursion = Excursionprotected('Puerto Real', 'Jerez')_
+```
 
-_print(excursion.\_monitor)_
+excursion = Excursionprotected('Puerto Real', 'Jerez')
 
-_print(excursion.\_destino)_
+print(excursion.\_monitor)
 
-_excursion.\_destino = 'Sevilla'_
+print(excursion.\_destino)
 
-_print(excursion._destino)_
+excursion.\_destino = 'Sevilla'
+
+print(excursion._destino)
+
+```
 
 ## Utilización de la clase con atributos privados
 Al ejecutar las instrucciones siendo excursion un objeto de la clase Excursionprivada, el intérprete da error al tratar de ejecutar las órdenes de acceso o modificación de atributos privados, de ahí el hecho de que se hallen comentadas.
 Véase en el código (Comentado por los errores que este código causa):
 
-_print(excursion.\_\_monitor)_
+```
 
-_print(excursion.\_\_destino)_
+print(excursion.\_\_monitor)
 
-_excursion.\_\_destino = 'Sevilla'_
+print(excursion.\_\_destino)
 
-_print(excursion.\_\_destino)_
+excursion.\_\_destino = 'Sevilla'
 
+print(excursion.\_\_destino)
+
+```
 
 # Conclusión
 Python no es un lenguaje de programación pensado para utilizar encapsulación, de ahí que la forma en la que se implementa no sea la más avanzada posible, y sea más bien una forma similar a la de lenguajes como C, C++ o Java, para que aquellos programadores que deseen usar Python para programar de una manera parecida a la que lo harían con estos lenguajes tengan una equivalencia como la presentada en el código, aunque ni siquiera implementada de forma completamente equivalente a la de estos lenguajes.

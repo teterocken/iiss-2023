@@ -6,13 +6,13 @@ Este archivo se puede ejecutar al ejecutar la instruccción "python encapsulacio
 Existen 3 clases que implementan exactamente lo mismo, una excursión con un atributo monitor, uno origen y uno destino. Excursionpublica la implementa con atributos publicos, Excursionprotected, con atributos protegidos (o su equivalente en Python, que es escribir el atributo empezando en \_), y Excursionprivada con atributos privados (o su equivalente en Python, que es escribir el atributo empezando en \_\_). Una vez definidas estas clases:
 El siguiente código representa a la clase Excursionpublica, las otras 2 clases son exactamente iguales pero añaden los respectivos \_ o \_\_ antes de los nombres de los atributos:
 
-```
+```python
 
 class Excursionpublica:
 
     monitor = 'Samuel'
 
-    def \_\_init\_\_(self, origen, destino):
+    def __init__(self, origen, destino):
 
         self.origen = origen
  
@@ -24,7 +24,7 @@ class Excursionpublica:
 Se crea una variable excursion de tipo Excursionpublica, y se muestra como se puede acceder y modificar los atributos de excursion sin problema alguno.
 Véase en el código:
 
-```
+```python
 
 excursion = Excursionpublica('Puerto Real', 'Jerez')
 
@@ -42,15 +42,15 @@ print(excursion.destino)
 La variable excursión pasa a ser protected y al ejecutar instrucciones de acceso o modificación de sus atributos se contempla que, aunque teóricamente no debiera ser así, Python no restringe el acceso o modificación a las variables protegidas, tan solo existe un weak warning por parte del framework que utilizo para trabajar con Python (por parte del propio intérprete Python no existe ningún problema para ejecutar el código).
 Véase en el código:
 
-```
+```python
 
 excursion = Excursionprotected('Puerto Real', 'Jerez')
 
-print(excursion.\_monitor)
+print(excursion._monitor)
 
-print(excursion.\_destino)
+print(excursion._destino)
 
-excursion.\_destino = 'Sevilla'
+excursion._destino = 'Sevilla'
 
 print(excursion._destino)
 
@@ -62,13 +62,13 @@ Véase en el código (Comentado por los errores que este código causa):
 
 ```
 
-print(excursion.\_\_monitor)
+print(excursion.__monitor)
 
-print(excursion.\_\_destino)
+print(excursion.__destino)
 
-excursion.\_\_destino = 'Sevilla'
+excursion.__destino = 'Sevilla'
 
-print(excursion.\_\_destino)
+print(excursion.__destino)
 
 ```
 

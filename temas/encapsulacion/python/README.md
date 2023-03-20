@@ -14,9 +14,9 @@ class Excursionpublica:
 
     def \_\_init\_\_(self, origen, destino):
 
-    self.origen = origen
+        self.origen = origen
  
-    self.destino = destino
+        self.destino = destino
 
 ```
 

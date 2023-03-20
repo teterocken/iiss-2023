@@ -7,13 +7,13 @@ Existen 3 clases que implementan exactamente lo mismo, una excursión con un atr
 ## Utilización de la clase con atributos públicos
 Se crea una variable excursion de tipo Excursionpublica, y se muestra como se puede acceder y modificar los atributos de excursion sin problema alguno.
 Vease en el código:
-_
-excursion = Excursionpublica('Puerto Real', 'Jerez')
-print(excursion.monitor)
-print(excursion.destino)
-excursion.destino = 'Sevilla'
-print(excursion.destino)
-_
+
+_excursion = Excursionpublica('Puerto Real', 'Jerez')|n
+print(excursion.monitor)|n
+print(excursion.destino)|n
+excursion.destino = 'Sevilla'|n
+print(excursion.destino)_
+
 ## Utilización de la clase con atributos protegidos
 La variable excursión pasa a ser protected y al ejecutar instrucciones de acceso o modificación de sus atributos se contempla que, aunque teóricamente no debiera ser así, Python no restringe el acceso o modificación a las variables protegidas, tan solo existe un weak warning por parte del framework que utilizo para trabajar con Python (por parte del propio intérprete Python no existe ningún problema para ejecutar el código).
 ## Utilización de la clase con atributos privados

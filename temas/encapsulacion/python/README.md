@@ -7,7 +7,6 @@ Existen 3 clases que implementan exactamente lo mismo, una excursión con un atr
 El siguiente código representa a la clase Excursionpublica, las otras 2 clases son exactamente iguales pero añaden los respectivos \_ o \_\_ antes de los nombres de los atributos:
 
 _class Excursionpublica:_
-
     _monitor = 'Samuel'_
 
     _def __init__(self, origen, destino):_

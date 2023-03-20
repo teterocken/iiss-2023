@@ -8,10 +8,10 @@ Existen 3 clases que implementan exactamente lo mismo, una excursión con un atr
 Se crea una variable excursion de tipo Excursionpublica, y se muestra como se puede acceder y modificar los atributos de excursion sin problema alguno.
 Vease en el código:
 
-_excursion = Excursionpublica('Puerto Real', 'Jerez')|n
-print(excursion.monitor)|n
-print(excursion.destino)|n
-excursion.destino = 'Sevilla'|n
+_excursion = Excursionpublica('Puerto Real', 'Jerez')\n
+print(excursion.monitor)\n
+print(excursion.destino)\n
+excursion.destino = 'Sevilla'\n
 print(excursion.destino)_
 
 ## Utilización de la clase con atributos protegidos

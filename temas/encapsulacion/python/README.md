@@ -4,6 +4,18 @@ Este archivo se puede ejecutar al ejecutar la instruccción "python encapsulacio
 
 # **Explicación del código**
 Existen 3 clases que implementan exactamente lo mismo, una excursión con un atributo monitor, uno origen y uno destino. Excursionpublica la implementa con atributos publicos, Excursionprotected, con atributos protegidos (o su equivalente en Python, que es escribir el atributo empezando en \_), y Excursionprivada con atributos privados (o su equivalente en Python, que es escribir el atributo empezando en \_\_). Una vez definidas estas clases:
+El siguiente código representa a la clase Excursionpublica, las otras 2 clases son exactamente iguales pero añaden los respectivos \_ o \_\_ antes de los nombres de los atributos:
+
+_class Excursionpublica:_
+
+    _monitor = 'Samuel'_
+
+    _def __init__(self, origen, destino):_
+
+        _self.origen = origen_
+ 
+        _self.destino = destino__
+
 ## Utilización de la clase con atributos públicos
 Se crea una variable excursion de tipo Excursionpublica, y se muestra como se puede acceder y modificar los atributos de excursion sin problema alguno.
 Véase en el código:
@@ -29,6 +41,8 @@ _print(excursion.\_monitor)_
 _print(excursion.\_destino)_
 
 _excursion.\_destino = 'Sevilla'_
+
+_print(excursion._destino)_
 
 ## Utilización de la clase con atributos privados
 Al ejecutar las instrucciones siendo excursion un objeto de la clase Excursionprivada, el intérprete da error al tratar de ejecutar las órdenes de acceso o modificación de atributos privados, de ahí el hecho de que se hallen comentadas.

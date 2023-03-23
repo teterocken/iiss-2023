@@ -8,7 +8,7 @@ class Vehiculo:
         print(f"El/La {self.marca} {self.modelo} está acelerando.")
 
 
-class Auto(Vehiculo):
+class Coche(Vehiculo):
     def __init__(self, marca, modelo, velocidad_maxima, numero_puertas):
         super().__init__(marca, modelo, velocidad_maxima)
         self.numero_puertas = numero_puertas
@@ -32,7 +32,7 @@ class Camion(Vehiculo):
         self.peso = peso
 
 
-vehiculos = [Auto("Toyota", "Corolla", 200, 4),
+vehiculos = [Coche("Toyota", "Corolla", 200, 4),
              Moto("Yamaha", "R1", 300, 1000),
              Camion("Volvo", "FH", 120, 19000)]
 

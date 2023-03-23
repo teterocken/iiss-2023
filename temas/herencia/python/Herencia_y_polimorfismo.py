@@ -32,8 +32,8 @@ class Camion(Vehiculo):
         self.peso = peso
 
 
-vehiculos = [Coche("Toyota", "Corolla", 200, 4),
-             Moto("Yamaha", "R1", 300, 1000),
+vehiculos = [Coche("Tesla", "Model X", 200, 4),
+             Moto("Kawasaki", "Z400", 300, 1000),
              Camion("Volvo", "FH", 120, 19000)]
 
 for vehiculo in vehiculos:

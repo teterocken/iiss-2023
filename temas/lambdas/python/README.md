@@ -48,12 +48,17 @@ print(f(3))
 
 Lo cual proporciona la siguiente salida:
 
-_9
-9
-True
-False
-False
-True_
+_9_
+
+_9_
+
+_True_
+
+_False_
+
+_False_
+
+_True_
 
 # Conclusión
 

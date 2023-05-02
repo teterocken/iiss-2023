@@ -3,6 +3,8 @@ Abriendo una terminal en la misma carpeta donde se haye el código, ejecutar la 
 
 # Explicación del código
 
+## Funciones lambda básicas
+
 Se crea una función convencional y una función lambda que devuelven el cuadrado del número que reciben:
 ```python
 def a(x):

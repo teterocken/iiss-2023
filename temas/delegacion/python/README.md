@@ -1,103 +1,133 @@
 # Ejecución del programa
-Los archivos se pueden ejecutar al escribir la orden en terminal "python Cuenta_Bancaria_Delegacion.py", o "python Cuenta_Bancaria_Herencia.py", estando situado en la misma carpeta que el respectivo archivo.
+Los archivos se pueden ejecutar al escribir la orden en terminal "python persona_delegacion.py", o "python persona_herencia.py", estando situado en la misma carpeta que el respectivo archivo.
 # Explicación del código
 Ambos códigos implementan la misma funcionalidad, diferenciándose ambos códigos en la forma en la que la implementan, siendo en un caso usando herencia, y en el otro, usando delegación.
-Nos encontramos en ambos códigos con la misma implementación de la clase CuentaBancaria:
-```python
-class CuentaBancaria:
-    def __init__(self, saldo, num_cuenta):
-        self.saldo = saldo
-        self.num_cuenta = num_cuenta
-
-    def depositar(self, cantidad):
-        self.saldo += cantidad
-
-    def retirar(self, cantidad):
-        if cantidad <= self.saldo:
-            self.saldo -= cantidad
-        else:
-            print("No posees suficientes fondos")
-```
-Esta clase representa una cuenta bancaria, que se crea con un saldo inicial y un numero de cuenta, y que tiene métodos para ingresar y para retirar (en caso de que sea posible) la cantidad señalada.
-
-Acto seguido se implementa una clase Persona, que representará a una persona propietaria de esa cuenta bancaria.
-
-En el caso de la herencia, la implementación es la siguiente:
-```python
-class Persona(CuentaBancaria):
-    def __init__(self, saldo, nombre, num_cuenta, edad):
-        super().__init__(saldo, num_cuenta)
-        self.nombre = nombre
-        self.edad = edad
-
-    def imprimirinfobancaria(self):
-        print(f"Soy {self.nombre}, tengo {self.edad} años, y tengo {self.saldo} euros en mi cuenta con "
-              f"numero {self.num_cuenta}.")
-```
-
-Persona en este caso, es una subclase de CuentaBancaria; un objeto Persona se crea con el nombre y la edad de la persona, su saldo y su numero de cuenta.
-
-Después se ejecuta el siguiente extracto de código:
-```python
-P1 = Persona(2000, "Paco", 3455099812431272, 23)
-P1.depositar(350)
-P1.imprimirinfobancaria()
-P1.retirar(1000)
-P1.imprimirinfobancaria()
-```
-Este extracto de código crea una persona y llama 2 veces al método que imprime su información, tras haber realizado un ingreso y una retirada. La salida es la siguiente:
-
-_Soy Paco, tengo 23 años, y tengo 2350 euros en mi cuenta con numero 3455099812431272._
-
-_Soy Paco, tengo 23 años, y tengo 1350 euros en mi cuenta con numero 3455099812431272._
-
-En el caso de la delegación, la implementación de la clase Persona es la siguiente:
+Nos encontramos en ambos códigos con la misma implementación de la clase Persona:
 ```python
 class Persona:
-    def __init__(self, nombre, edad, cuenta):
+    def __init__(self, nombre, edad, genero):
         self.nombre = nombre
         self.edad = edad
-        self.cuenta = cuenta
+        self.genero = genero
 
-    def __getattr__(self, item):
-        return getattr(self.cuenta, item)
+    def presentarse(self):
+        print(f"Hola soy {self.nombre} y tengo {self.edad} años.")
+```
+Esta clase representa una persona, que se crea con su nombre, edad y genero, y que tiene un método para presentarse.
 
-    def imprimirinfobancaria(self):
-        print(f"Soy {self.nombre}, tengo {self.edad} años, y tengo {self.saldo} euros en mi cuenta con "
-              f"numero {self.num_cuenta}.")
+Acto seguido se implementa una clase Estudiante.
+
+En el caso de la herencia, la implementación es la siguiente:
+
+```python
+class Estudiante(Persona):
+    def __init__(self, nombre, edad, genero, grado, curso):
+        super().__init__(nombre, edad, genero)
+        self.grado = grado
+        self.curso = curso
+
+    def estudio(self):
+        print("Estudio " + self.grado + " y estoy en el curso numero " + str(self.curso) + ".")
 ```
 
-Persona en este caso, es una clase "independiente" de CuentaBancaria, ya que para crear un objeto Persona no es necesario crearlo con sus datos bancarios, sino que se crea con asociandole otro objeto CuentaBancaria.
+Estudiante en este caso, es una subclase de Persona; un objeto Estudiante se crea con el nombre, la edad y el genero de la persona, su grado y el curso en el que está. Un estudiante puede presentarse, y también puede decir que estudia.
 
-Para poder delegar los métodos y atributos de CuentaBancaria a Persona se usa el _getattr_, que permite que un objeto persona realice los cambios pertinentes en el objeto CuentaBancaria que tiene asociado.
+También se implementa una clase Funcionario.
+
+En el caso de la herencia, la implementación es la siguiente:
+
+```python
+class Funcionario(Persona):
+    def __init__(self, nombre, edad, genero, puesto):
+        super().__init__(nombre, edad, genero)
+        self.puesto = puesto
+
+    def trabajo(self):
+        print(f"Tengo un puesto como funcionario/a, soy {self.puesto}.")
+```
+
+Funcionario es también una subclase de Persona; un objeto Funcionario se crea con el nombre, edad y género de la persona, y su puesto. Un funcionario puede presentarse y también puede decir cuál es su puesto.
 
 Después se ejecuta el siguiente extracto de código:
 ```python
-cuenta_banco = CuentaBancaria(2000, 3455099812431272)
-P1 = Persona("Paco", 23, cuenta_banco)
-P1.depositar(350)
-P1.imprimirinfobancaria()
-P1.retirar(1000)
-P1.imprimirinfobancaria()
+P = Persona("Manuel", 20, "M")
+P.presentarse()
+E = Estudiante("Lolo", 23, "M", "Ingeniería Informática", 4)
+E.presentarse()
+E.estudio()
+F = Funcionario("Isabel", 34, "F", "policia")
+F.presentarse()
+F.trabajo()
+```
+Este extracto de código crea una persona, la cual se presenta; crea un estudiante, el cual se presenta y dice de qué estudia; y crea un funcionario, el cual se presenta y dice cuál es su puesto. La salida es la siguiente:
+
+_Hola soy Manuel y tengo 20 años._
+
+_Hola soy Lolo y tengo 23 años._
+
+_Estudio Ingeniería Informática y estoy en el curso numero 4._
+
+_Hola soy Isabel y tengo 34 años._
+
+_Tengo un puesto como funcionario/a, soy policia._
+
+En el caso de la delegación, la implementación de la clase Estudiante es la siguiente:
+
+```python
+class Estudiante:
+    def __init__(self, persona, grado, curso):
+        self.persona = persona
+        self.grado = grado
+        self.curso = curso
+
+    def __getattr__(self, item):
+        return getattr(self.persona, item)
+
+    def estudio(self):
+        print("Estudio " + self.grado + " y estoy en el curso numero " + str(self.curso) +".")
 ```
 
-Este extracto de código crea una persona y llama 2 veces al método que imprime su información, tras haber realizado un ingreso y una retirada, lo mismo que en el caso de la herencia. Sin embargo en este caso, hay que crear primero el objeto CuentaBancaria, y después, asociarlo con la Persona que se crea. La salida es la siguiente (es la misma que en el caso de la herencia):
+Y la implementación de la clase Funcionario es la siguiente:
 
-_Soy Paco, tengo 23 años, y tengo 2350 euros en mi cuenta con numero 3455099812431272._
+```python
+class Funcionario:
+    def __init__(self, persona, puesto):
+        self.persona = persona
+        self.puesto = puesto
 
-_Soy Paco, tengo 23 años, y tengo 1350 euros en mi cuenta con numero 3455099812431272._
+    def __getattr__(self, item):
+        return getattr(self.persona, item)
+
+    def trabajo(self):
+        print(f"Tengo un puesto como funcionario/a, soy {self.puesto}.")
+```
+
+Estudiante en este caso, es una clase "independiente" de Persona, ya que para crear un objeto Estudiante no es necesario crearlo con sus datos personales, sino que se crea asociandole otro objeto Persona. Ocurre lo mismo con Funcionario.
+
+Para poder delegar los métodos y atributos de Persona a Estudiante y a Funcionario se usa el \_\_getattr\_\_, que permite que un objeto Estudiante o Funcionario realice los cambios pertinentes en el objeto Persona que tiene asociado.
+
+Después se ejecuta el siguiente extracto de código:
+```python
+P = Persona("Manuel", 20, "M")
+P.presentarse()
+PE = Persona("Lolo", 23, "M")
+E = Estudiante(PE, "Ingeniería Informática", 4)
+E.presentarse()
+E.estudio()
+PF = Persona("Isabel", 34, "F")
+F = Funcionario(PF, "policia")
+F.presentarse()
+F.trabajo()
+```
+
+La salida que da este extracto de código es exactamente la misma que en el caso de la herencia. Como podemos ver, crea a las mismas personas, pero se asocia de una manera distinta.
 
 # Conclusión
-Aunque en este caso tan sencillo la diferencia no se note tanto, hay muchos motivos por el que el utilizar delegación en casos como este es mucho más conveniente que usar herencia.
 
-En primer lugar, desde un punto de vista de diseño, el hecho de que una clase Persona sea una subclase de una clase CuentaBancaria, carece de un gran sentido, aunque no sea incorrecto.
+Python permite la implementación de la delegación de una manera muy sencilla, y es que se asocia directamente el objeto del que se van a delegar métodos y atributos, y se delegan estos métodos y atributos muy sencillamente con la operación \_\_getattr()\_\_.
 
-En segundo lugar, si los constructores de CuentaBancaria y Persona necesitasen de un número muy extenso de atributos, en el caso de la herencia podría ser un lío, debido a la falta de cohesión entre los atributos que pudiese pedir el constructor de Persona (pediría los de CuentaBancaria, más los específicos de una persona).
+En este caso es más recomendable el uso de delegación, puesto que permite mayor flexibilidad con los objetos Persona.
 
-Sin embargo, en el caso de la delegación, la cohesión sería mucho mayor, puesto que se crearía la cuenta bancaria, y después se le asociaría como un atributo más a Persona.
+En el caso de la herencia, las personas solo se pueden crear como Persona base, como Estudiante, o como Funcionario. Si una persona deja de estudiar o deja de ser funcionaria, se borra del sistema como Estudiante o Funcionario, lo cual hace que se borre la Persona en sí del sistema.
 
-En tercer lugar, el código de delegación es mucho más flexible y reutilizable.
-
-Sería muy sencillo por ejemplo, poder asociarle un objeto CuentaPlayStore a persona, con un propio monedero y distintos métodos, y, por ejemplo, otra clase CuentaInstagram, con métodos como publicarFoto() o darLikeAFoto(Foto).
-
-Sin embargo, realizar esto en el caso de la herencia sería de una complejidad demasiado alta.
+Sin embargo, en el caso de la delegación, cuando una persona deja de estudiar o de ser funcionario, se puede borrar el objeto Estudiante o Funcionario sin necesidad de borrar a la Persona del sistema.

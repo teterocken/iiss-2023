@@ -35,3 +35,9 @@ E.estudio()
 F = Funcionario("Isabel", 34, "F", "policia")
 F.presentarse()
 F.trabajo()
+
+# ¿Puede una persona ser funcionario y estudiante a la vez?
+
+Func_estudiante = Funcionario("Lolo", 23, "M", "bombero")
+Func_estudiante.presentarse()
+Func_estudiante.trabajo()

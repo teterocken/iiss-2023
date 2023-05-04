@@ -122,6 +122,20 @@ F.trabajo()
 
 La salida que da este extracto de código es exactamente la misma que en el caso de la herencia. Como podemos ver, crea a las mismas personas, pero se asocia de una manera distinta.
 
+### ¿Y si una persona fuese estudiante y funcionario a la vez?
+
+En el caso de la delegación sería (tomando en cuenta que PE es la persona que fue asignada como estudiante previamente):
+
+```python
+Func_estudiante = Funcionario(PE, "bombero")
+```
+
+Y en el caso de la herencia sería:
+
+```python
+Func_estudiante = Funcionario("Lolo", 23, "M", "bombero")
+```
+
 # Conclusión
 
 Python permite la implementación de la delegación de una manera muy sencilla, y es que se asocia directamente el objeto del que se van a delegar métodos y atributos, y se delegan estos métodos y atributos muy sencillamente con la operación \_\_getattr()\_\_.
@@ -131,3 +145,5 @@ En este caso es más recomendable el uso de delegación, puesto que permite mayo
 En el caso de la herencia, las personas solo se pueden crear como Persona base, como Estudiante, o como Funcionario. Si una persona deja de estudiar o deja de ser funcionaria, se borra del sistema como Estudiante o Funcionario, lo cual hace que se borre la Persona en sí del sistema.
 
 Sin embargo, en el caso de la delegación, cuando una persona deja de estudiar o de ser funcionario, se puede borrar el objeto Estudiante o Funcionario sin necesidad de borrar a la Persona del sistema.
+
+En el caso de que una persona sea tanto estudiante como funcionaria también es mucho mejor el uso de delegación, ya que, se esta asociando a los objetos Estudiante o Funcionario la propia Persona, sin embargo, en el caso de la herencia solo se puede guardar un objeto de cada tipo con los mismos datos personales, pero no un enlace directo a la persona.

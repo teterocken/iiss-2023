@@ -43,3 +43,9 @@ PF = Persona("Isabel", 34, "F")
 F = Funcionario(PF, "policia")
 F.presentarse()
 F.trabajo()
+
+# ¿Puede una persona ser funcionario y estudiante a la vez?
+
+Func_estudiante = Funcionario(PE, "bombero")
+Func_estudiante.presentarse()
+Func_estudiante.trabajo()

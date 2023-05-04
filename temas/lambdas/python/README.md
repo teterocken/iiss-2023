@@ -203,4 +203,4 @@ Esta nomenclatura no aclaraba para nada qué hace cada función, es por eso que 
 
 Además en el caso de las funciones que detectan impares, se podía reciclar el funcionamiento de las funciones que detectan pares, pues hacen todo lo contrario, así también se corrige el problema del código duplicado.
 
-Cabe aclarar que en es_par_lamda podría haber usado la función es_par, pero quería enseñar también como se implementaba la función lambda.
+Cabe aclarar que en es_par_lamda se podría haber usado la función es_par, pero quería enseñar también como se implementaba la función lambda.

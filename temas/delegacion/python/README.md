@@ -104,7 +104,7 @@ class Funcionario:
 
 Estudiante en este caso, es una clase "independiente" de Persona, ya que para crear un objeto Estudiante no es necesario crearlo con sus datos personales, sino que se crea asociandole otro objeto Persona. Ocurre lo mismo con Funcionario.
 
-Para poder delegar los métodos y atributos de Persona a Estudiante y a Funcionario se usa el \_\_getattr\_\_, que permite que un objeto Estudiante o Funcionario realice los cambios pertinentes en el objeto Persona que tiene asociado.
+Para poder delegar los métodos y atributos de Persona a Estudiante y a Funcionario se usa el \_\_getattr\_\_(), que permite que un objeto Estudiante o Funcionario realice los cambios pertinentes en los atributos del objeto Persona que tiene asociado, o que invoque sus métodos.
 
 Después se ejecuta el siguiente extracto de código:
 ```python

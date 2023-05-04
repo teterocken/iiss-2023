@@ -199,7 +199,7 @@ Los tuple generators sirven para, mediante el uso de funciones lambda, crear una
 # Refactoring
 
 En la parte de funciones lambda básicas, las funciones se llamaban a(), c() y e(). Las funciones lambda eran guardadas en las variables b, d y f.
-Esta nomenclatura no aclaraba para nada qué hace cada función, es por eso que cambié el nombre a cuadrado() y su respectiva cuadrado_lambda, ws_par() y su respectiva es_par_lambda y es_impar() y su respectiva es_impar_lambda. Lo cual ahora sí aclara el funcionamiento de las funciones.
+Esta nomenclatura no aclaraba para nada qué hace cada función, es por eso que cambié el nombre a cuadrado() y su respectiva cuadrado_lambda, es_par() y su respectiva es_par_lambda y es_impar() y su respectiva es_impar_lambda. Lo cual ahora sí aclara el funcionamiento de las funciones.
 
 Además en el caso de las funciones que detectan impares, se podía reciclar el funcionamiento de las funciones que detectan pares, pues hacen todo lo contrario, así también se corrige el problema del código duplicado.
 

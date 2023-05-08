@@ -116,10 +116,43 @@ Utilicé Spring para la inyección de dependencias, con el método de usar beans
 	</bean>
 	<bean id="polloplancha" class="com.uca.iiss.Receta">
 		<constructor-arg index="0" ref="pollo"/>
-        <constructor-arg index="1" ref="cebolla"/>
-        <constructor-arg index="2" ref="sal"/>
-        <constructor-arg index="3" ref="cebollino"/>
+        	<constructor-arg index="1" ref="cebolla"/>
+        	<constructor-arg index="2" ref="sal"/>
+        	<constructor-arg index="3" ref="cebollino"/>
 	</bean>
 </beans>
 ```
 
+Tras esto, cree el siguiente código para efectuar la inyección de dependencias mediante beans y para cocinar cada ingrediente de la receta:
+
+```python
+public class PruebaReceta
+{
+	private static ApplicationContext context;
+
+	public static void main (String[] args) throws Exception
+	{
+		context = new ClassPathXmlApplicationContext(new String[]{"receta.xml"});
+		BeanFactory factory = context;
+		Receta receta = (Receta) factory.getBean("polloplancha");
+		for (Ingrediente i: receta) i.cocinar();
+	}
+}
+```
+
+La salida es la siguiente:
+
+```
+Cocinamos muy bien el/lapollo
+Cortamos y echamos el/la cebolla  
+Agregamos una pizca de sal        
+Cortamos y echamos el/la cebollino
+```
+
+# Conclusión
+
+Con este código conseguimos generar dependencias por parte de Receta al resto de tipos de Ingredientes.
+
+Si bien Spring es una herramienta muy útil, hay que cuidar hasta el más mínimo detalle para que la inyección de dependencias funcione, cosa que, una vez se tiene más experiencia con la herramienta no será difícil, sin embargo, si es más complicado el realizar una primera toma de contacto.
+
+Otro punto positivo de la herramienta es que permite realizar la inyección de dependencias sin necesidad de "ensuciar" demasiado el código, ya que todo se hace en un fichero xml a parte.

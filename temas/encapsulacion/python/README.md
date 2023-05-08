@@ -89,7 +89,7 @@ print(excursion.__monitor)
 
 _AttributeError: 'Excursionprivada' object has no attribute '\_\_monitor'_
 
-## Ocultación de implementación de operaciones/métodos
+## Ocultación de implementación de operaciones/métodos de la misma manera que la ocultación de datos
 
 Se crea la clase calculadora, que tendrá un método público multiplicar(), que hace uso de un método privado sumar():
 
@@ -128,7 +128,61 @@ print(C1.__sumar(4,5))
     
 _AttributeError: 'Calculadora' object has no attribute '\_\_sumar'_
 
+## Ocultación de operaciones/métodos
+
+Tomando la clase Futbolista como la unica interfaz que podría ser visible para el cliente, se le podría así ocultar el funcionamiento del método carta_presentacion(), que será implementado en cada subclase de futbolista de una manera específica.
+    
+La clase Futbolista sería la siguiente:
+
+```python
+   class Futbolista:
+    def __init__(self, nombre):
+        self.nombre = nombre
+
+    def carta_presentacion(self):
+        pass 
+```
+    
+Tras esto, se escriben dos subclases de esta clase:
+    
+```python
+class Delantero(Futbolista):
+    def __init__(self, nombre, goles):
+        super().__init__(nombre)
+        self.goles = goles
+
+    def carta_presentacion(self):
+        print(f"Mi nombre es {self.nombre}, juego de delantero y esta temporada llevo {self.goles} goles.")
+```
+	
+```python
+class Defensa(Futbolista):
+    def __init__(self, nombre, robos):
+        super().__init__(nombre)
+        self.robos = robos
+
+    def carta_presentacion(self):
+        print(f"Mi nombre es {self.nombre}, juego como defensa y esta temporada llevo {self.robos} robos de balón.")
+```
+	
+Para comprobar el correcto funcionamiento de estas dos clases escribí el siguiente código:
+	
+```python
+Leo = Delantero("Leo Messi", 40)
+Mili = Defensa("Eder Militao", 124)
+Leo.carta_presentacion()
+Mili.carta_presentacion()
+```
+	
+Tendrá la siguiente salida:
+```
+Mi nombre es Leo Messi, juego de delantero y esta temporada llevo 40 goles.
+Mi nombre es Eder Militao, juego como defensa y esta temporada llevo 124 robos de balón.
+```
+    
 # Conclusión
 Python no es un lenguaje de programación pensado para utilizar encapsulación, de ahí que la forma en la que se implementa no sea la más avanzada posible, y sea más bien una forma similar a la de lenguajes como C, C++ o Java, para que aquellos programadores que deseen usar Python para programar de una manera parecida a la que lo harían con estos lenguajes tengan una equivalencia como la presentada en el código, aunque ni siquiera implementada de forma completamente equivalente a la de estos lenguajes.
     
-La ocultación de operaciones es muy similar a lo que ocurre con la ocultación de métodos. Al igual que en lenguajes más centrados a la orientación a objetos, sigue siendo muy útil para ocultar ciertos métodos al cliente, pudiendo utilizarlos en la propia clase.
+La ocultación de operaciones de manera similar a lo que ocurre con la ocultación de atributos, al igual que en lenguajes más centrados a la orientación a objetos, sigue siendo muy útil para ocultar ciertos métodos al cliente, pudiendo utilizarlos en la propia clase.
+	
+La ocultación de la implementación operaciones/métodos se puede realizar de manera muy sencilla utilizando el pass, lo cual permite especificar el funcionamiento de los métodos en cada superclase, y aún así seguir dando una interfaz conmigo. Es muy similar al virtual en C++ o al abstract en Java.

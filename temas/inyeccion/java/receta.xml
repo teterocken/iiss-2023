@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="pollo" class="com.uca.iiss.Carne">
+		<constructor-arg index="0" value ="pollo"/>
+	</bean>
+	<bean id="cebolla" class="com.uca.iiss.Hortaliza">
+		<constructor-arg index="0" value ="cebolla"/>
+	</bean>
+	<bean id="sal" class="com.uca.iiss.Especia">
+		<constructor-arg index="0" value ="sal"/>
+	</bean>
+	<bean id="cebollino" class="com.uca.iiss.Hortaliza">
+		<constructor-arg index="0" value ="cebollino"/>
+	</bean>
+	<bean id="polloplancha" class="com.uca.iiss.Receta">
+		<constructor-arg index="0" ref="pollo"/>
+        <constructor-arg index="1" ref="cebolla"/>
+        <constructor-arg index="2" ref="sal"/>
+        <constructor-arg index="3" ref="cebollino"/>
+	</bean>
+</beans>

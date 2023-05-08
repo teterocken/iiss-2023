@@ -56,4 +56,29 @@ class Cineentradas(Observer):
         print("Ha pedido " + entradas + " entradas.")
 ```
 
+Una vez escrito todo esto, se creará un objeto de cada Concrete Observer, y se pedirá al usuario los datos asociados a los eventos que querrán actualizar estos Concrete Observers:
 
+```python
+pelicula_observer = Cinepelicula()
+    pelicula = input()
+    entradas_observer = Cineentradas()
+    entradas = input()
+    pelicula_observer.observe("Que comemos de primero", pelicula_observer.que_vemos)
+    entradas_observer.observe("Y de segundo", entradas_observer.cuantos_somos)
+    Evento("Que comemos de primero", pelicula)
+    Evento("Y de segundo", entradas)
+```
+
+Un ejemplo de salida sería el siguiente:
+```
+¿Que pelicula desea ver?
+El Padrino
+¿Cuantas entradas desea?
+Tres
+Usted/es verán la película El Padrino.
+Ha pedido Tres entradas.
+```
+
+# Conclusión
+
+Es muy sencillo implementar el patrón Observer en Python y añadirle la funcionalidad de los observables- Esto nos permite crear código como el del ejemplo, que permitirá una programación orientada a eventos un tanto rudimentaria gracias a la clase Evento, lo cual permite el uso de observables para poder actualizar al Concrete Observer cuando sea posible con los datos del correspondiente evento.

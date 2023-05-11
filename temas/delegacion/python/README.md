@@ -1,8 +1,51 @@
 # Ejecución del programa
 Los archivos se pueden ejecutar al escribir la orden en terminal "python persona_delegacion.py", o "python persona_herencia.py", estando situado en la misma carpeta que el respectivo archivo.
 # Explicación del código
-Ambos códigos implementan la misma funcionalidad, diferenciándose ambos códigos en la forma en la que la implementan, siendo en un caso usando herencia, y en el otro, usando delegación.
-Nos encontramos en ambos códigos con la misma implementación de la clase Persona:
+
+Ambos códigos implementan la misma funcionalidad, un programa que permite crear personas base, personas estudiantes y personas funcionarias. La diferencia en el caso de la herencia es que hace falta crear dos clases abstractas para implementar un patrón Decorator que permita instanciar a una persona que pueda ser tanto estudiante como funcionaria. Las clases abstractas son las siguientes:
+
+```python
+class Empleado(ABC):
+    @abstractmethod
+    def __init__(self, nombre, edad, genero):
+        self.nombre = nombre
+        self.edad = edad
+        self.genero = genero
+
+    @abstractmethod
+    def presentarse(self):
+        pass
+```
+
+```python
+class Trabajador(Empleado):
+    _empleado: Empleado
+
+    @abstractmethod
+    def __init__(self, persona: Persona):
+        self._empleado = persona
+
+    def empleado(self):
+        return self._empleado
+
+    @abstractmethod
+    def presentarse(self):
+        pass
+```
+
+Después ambas implementan una clase persona, con exactamente la misma funcionalidad, pero con la diferencia de que en el caso de la herencia la clase Persona hereda de la clase abstracta Empleado.
+
+Herencia:
+```python
+class Persona(Empleado):
+    def __init__(self, nombre, edad, genero):
+        super().__init__(nombre, edad, genero)
+
+    def presentarse(self):
+        print(f"Hola soy {self.nombre} y tengo {self.edad} años.")
+```
+
+Delegación:
 ```python
 class Persona:
     def __init__(self, nombre, edad, genero):
@@ -13,65 +56,39 @@ class Persona:
     def presentarse(self):
         print(f"Hola soy {self.nombre} y tengo {self.edad} años.")
 ```
-Esta clase representa una persona, que se crea con su nombre, edad y genero, y que tiene un método para presentarse.
 
-Acto seguido se implementa una clase Estudiante.
+Después, ambos códigos implementan las clases Estudiante y Funcionario (en el caso de la herencia especializan la función presentarse, en el caso de la delegación preferí dejar que llamasen al método de Persona, para mostrar mejor el potencial de getattr()).
 
-En el caso de la herencia, la implementación es la siguiente:
+Primero, en el caso de la herencia:
 
 ```python
-class Estudiante(Persona):
-    def __init__(self, nombre, edad, genero, grado, curso):
-        super().__init__(nombre, edad, genero)
+class Estudiante(Trabajador):
+    def __init__(self, persona: Persona, grado, curso):
+        super().__init__(persona)
         self.grado = grado
         self.curso = curso
+
+    def presentarse(self):
+        print("Me llamo " + self.empleado().nombre + ", soy estudiante, y tengo " + str(self.empleado().edad) + " años")
 
     def estudio(self):
         print("Estudio " + self.grado + " y estoy en el curso numero " + str(self.curso) + ".")
 ```
 
-Estudiante en este caso, es una subclase de Persona; un objeto Estudiante se crea con el nombre, la edad y el genero de la persona, su grado y el curso en el que está. Un estudiante puede presentarse, y también puede decir que estudia.
-
-También se implementa una clase Funcionario.
-
-En el caso de la herencia, la implementación es la siguiente:
-
 ```python
-class Funcionario(Persona):
-    def __init__(self, nombre, edad, genero, puesto):
-        super().__init__(nombre, edad, genero)
+class Funcionario(Trabajador):
+    def __init__(self, persona: Persona, puesto):
+        super().__init__(persona)
         self.puesto = puesto
+
+    def presentarse(self):
+        print("Me llamo " + self.empleado().nombre + ", soy funcionario/a, de " + str(self.empleado().edad) + " años.")
 
     def trabajo(self):
         print(f"Tengo un puesto como funcionario/a, soy {self.puesto}.")
 ```
 
-Funcionario es también una subclase de Persona; un objeto Funcionario se crea con el nombre, edad y género de la persona, y su puesto. Un funcionario puede presentarse y también puede decir cuál es su puesto.
-
-Después se ejecuta el siguiente extracto de código:
-```python
-P = Persona("Manuel", 20, "M")
-P.presentarse()
-E = Estudiante("Lolo", 23, "M", "Ingeniería Informática", 4)
-E.presentarse()
-E.estudio()
-F = Funcionario("Isabel", 34, "F", "policia")
-F.presentarse()
-F.trabajo()
-```
-Este extracto de código crea una persona, la cual se presenta; crea un estudiante, el cual se presenta y dice de qué estudia; y crea un funcionario, el cual se presenta y dice cuál es su puesto. La salida es la siguiente:
-
-_Hola soy Manuel y tengo 20 años._
-
-_Hola soy Lolo y tengo 23 años._
-
-_Estudio Ingeniería Informática y estoy en el curso numero 4._
-
-_Hola soy Isabel y tengo 34 años._
-
-_Tengo un puesto como funcionario/a, soy policia._
-
-En el caso de la delegación, la implementación de la clase Estudiante es la siguiente:
+En el caso de la delegación:
 
 ```python
 class Estudiante:
@@ -84,10 +101,8 @@ class Estudiante:
         return getattr(self.persona, item)
 
     def estudio(self):
-        print("Estudio " + self.grado + " y estoy en el curso numero " + str(self.curso) +".")
+        print("Estudio " + self.grado + " y estoy en el curso numero " + str(self.curso))
 ```
-
-Y la implementación de la clase Funcionario es la siguiente:
 
 ```python
 class Funcionario:
@@ -99,14 +114,11 @@ class Funcionario:
         return getattr(self.persona, item)
 
     def trabajo(self):
-        print(f"Tengo un puesto como funcionario/a, soy {self.puesto}.")
+        print(f"Tengo un puesto como funcionario/a, soy {self.puesto}")
 ```
 
-Estudiante en este caso, es una clase "independiente" de Persona, ya que para crear un objeto Estudiante no es necesario crearlo con sus datos personales, sino que se crea asociandole otro objeto Persona. Ocurre lo mismo con Funcionario.
+Tras esto, en ambos código escribí las siguientes líneas:
 
-Para poder delegar los métodos y atributos de Persona a Estudiante y a Funcionario se usa el \_\_getattr\_\_(), que permite que un objeto Estudiante o Funcionario realice los cambios pertinentes en los atributos del objeto Persona que tiene asociado, o que invoque sus métodos.
-
-Después se ejecuta el siguiente extracto de código:
 ```python
 P = Persona("Manuel", 20, "M")
 P.presentarse()
@@ -120,30 +132,47 @@ F.presentarse()
 F.trabajo()
 ```
 
-La salida que da este extracto de código es exactamente la misma que en el caso de la herencia. Como podemos ver, crea a las mismas personas, pero se asocia de una manera distinta.
-
-### ¿Y si una persona fuese estudiante y funcionario a la vez?
-
-En el caso de la delegación sería (tomando en cuenta que PE es la persona que fue asignada como estudiante previamente):
-
-```python
-Func_estudiante = Funcionario(PE, "bombero")
+Las cuales, en el caso de la herencia dan la siguiente salida:
+```
+Hola soy Manuel y tengo 20 años.
+Me llamo Lolo, soy estudiante, y tengo 23 años
+Estudio Ingeniería Informática y estoy en el curso numero 4.
+Me llamo Isabel, soy funcionario/a, de 34 años.
+Tengo un puesto como funcionario/a, soy policia.
 ```
 
-Y en el caso de la herencia sería:
+Y en el caso de la delegación:
+```
+Hola soy Manuel y tengo 20 años.
+Hola soy Lolo y tengo 23 años.
+Estudio Ingeniería Informática y estoy en el curso numero 4.
+Hola soy Isabel y tengo 34 años.
+Tengo un puesto como funcionario/a, soy policia.
+```
 
+Tras esto, quise probar como una persona podía ser tanto Estudiante como Funcionario, así que escribí en ambos códigos lo siguiente:
 ```python
-Func_estudiante = Funcionario("Lolo", 23, "M", "bombero")
+Func_estudiante = Funcionario(PE, "bombero")
+Func_estudiante.presentarse()
+Func_estudiante.trabajo()
+```
+
+Lo cual devolvía la siguiente salida en el caso de la herencia:
+```
+Me llamo Lolo, soy funcionario/a, de 23 años.
+Tengo un puesto como funcionario/a, soy bombero.
+```
+
+Y la siguiente salida en el caso de la delegación:
+```
+Hola soy Lolo y tengo 23 años.
+Tengo un puesto como funcionario/a, soy bombero.
 ```
 
 # Conclusión
 
 Python permite la implementación de la delegación de una manera muy sencilla, y es que se asocia directamente el objeto del que se van a delegar métodos y atributos, y se delegan estos métodos y atributos muy sencillamente con la operación \_\_getattr()\_\_.
 
-En este caso es más recomendable el uso de delegación, puesto que permite mayor flexibilidad con los objetos Persona.
+En este caso es más recomendable el uso de delegación, puesto que permite mayor flexibilidad con los objetos Persona, sin necesidad de la creación de 2 clases abstractas más.
 
-En el caso de la herencia, las personas solo se pueden crear como Persona base, como Estudiante, o como Funcionario. Si una persona deja de estudiar o deja de ser funcionaria, se borra del sistema como Estudiante o Funcionario, lo cual hace que se borre la Persona en sí del sistema.
-
-Sin embargo, en el caso de la delegación, cuando una persona deja de estudiar o de ser funcionario, se puede borrar el objeto Estudiante o Funcionario sin necesidad de borrar a la Persona del sistema.
-
-En el caso de que una persona sea tanto estudiante como funcionaria también es mucho mejor el uso de delegación, ya que, se esta asociando a los objetos Estudiante o Funcionario la propia Persona, sin embargo, en el caso de la herencia solo se puede guardar un objeto de cada tipo con los mismos datos personales, pero no un enlace directo a la persona.
+Para conseguir que una persona pueda ser tanto estudiante como funcionaria, es mucho más comoda la implementación con la delegación, ya que, aunque con herencia se pueda conseguir la misma funcionalidad, se consigue de una manera mucho más compleja y que además, no deja de ser una "pseudodelegación".

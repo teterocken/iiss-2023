@@ -135,14 +135,18 @@ Tomando la clase Futbolista como la unica interfaz que podría ser visible para 
 La clase Futbolista sería la siguiente:
 
 ```python
-   class Futbolista:
+   class Futbolista(ABC):
+    @abstractmethod
     def __init__(self, nombre):
         self.nombre = nombre
 
+    @abstractmethod
     def carta_presentacion(self):
-        pass 
+        pass
 ```
     
+Esta clase es una clase abstracta, por lo cual no se puede instanciar ningún objeto de tipo Futbolista.
+	
 Tras esto, se escriben dos subclases de esta clase:
     
 ```python
@@ -185,4 +189,4 @@ Python no es un lenguaje de programación pensado para utilizar encapsulación, 
     
 La ocultación de operaciones de manera similar a lo que ocurre con la ocultación de atributos, al igual que en lenguajes más centrados a la orientación a objetos, sigue siendo muy útil para ocultar ciertos métodos al cliente, pudiendo utilizarlos en la propia clase.
 	
-La ocultación de la implementación operaciones/métodos se puede realizar de manera muy sencilla utilizando el pass, lo cual permite especificar el funcionamiento de los métodos en cada superclase, y aún así seguir dando una interfaz conmigo. Es muy similar al virtual en C++ o al abstract en Java.
+La ocultación de la implementación operaciones/métodos se puede realizar de manera muy sencilla utilizando el pass y la herencia de la clase ABC y la etiqueta @abstractmethod (ambas de la biblioteca abc), lo cual permite especificar el funcionamiento de los métodos en cada superclase, y aún así seguir dando una interfaz común. Es muy similar al virtual en C++ o al abstract en Java.

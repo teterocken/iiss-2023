@@ -1,6 +1,6 @@
 # Ejecución del programa
 
-Será necesario ejecutar en una terminal localizada en el mismo directorio que el archivo cpp la siguiente orden:
+Será necesario ejecutar en una terminal localizada en el mismo directorio que el archivo cpp y el archivo numeros.txt la siguiente orden:
 
 _g++ -o Optional Optional.cpp_
 
@@ -49,7 +49,7 @@ Entonces, el siguiente fragmento de código:
 
 ```c++
 if (pos.has_value()) cout<<"Numero encontrado en la posicion: "<<pos.value()<<endl;
-else cout<<"Numero no encontrado"<<endl;
+else cout<<"Numero no encontrado"<<endl<<endl<<endl<<endl<<endl;
 ```
 
 Devolverá la siguiente salida en el caso del ejemplo:
@@ -60,6 +60,64 @@ Si en lugar de 37, se le hubiese pasado a la función el valor 33, la salida ser
 
 _Numero encontrado en la posicion: 2_
 
+Ahora el siguiente ejemplo, se muestra como puede usarse optional para tratar con streams de datos, en este caso, un fichero de texto.
+	
+Para empezar tenemos una función que va a recibir cada linea del fichero de texteo y la va a convertir a entero (un entero envuelto en un optional), y que en caso de que no pueda transformar la linea a entero, devuelve un valor nullopt, como el visto en el ejemplo anterior:
+
+```c++
+optional<int> sacarnumero (const string& cad)
+{
+	try
+	{
+		return stoi(cad);
+	} catch(const std::invalid_argument& e)
+	{
+		cerr<<"Argumento no valido, no se puede extraer un entero de esa linea."<<endl;
+		return nullopt;
+	}
+}
+```
+	
+Tras esto, creamos la siguiente estructura, que permitirá procesar el fichero numeros.txt línea por línea:
+	
+```c++
+ifstream file("numeros.txt");
+	if(file.is_open())
+	{
+		string linea;
+		int i = 1;
+		while(getline(file, linea))
+		{
+			optional<int> numero = sacarnumero(linea);
+			if(numero.has_value())
+			{
+				cout<<"El numero de la linea "<<i<<" es: "<<numero.value()<<endl;
+			} else
+			{
+				cout<<"Error al convertir la linea "<<i<<" a entero\n";
+			}
+			i++;
+		}
+	} else
+	{
+		cout<<"No se puede abrir el archivo\n";
+	}
+```
+	
+En el caso del fichero numeros.txt entregado, la salida sería la siguiente:
+
+```
+El numero de la linea 1 es: 13
+El numero de la linea 2 es: 12
+El numero de la linea 3 es: 16
+El numero de la linea 4 es: 34
+El numero de la linea 5 es: 123
+El numero de la linea 6 es: 53634
+Argumento no valido, no se puede extraer un entero de esa linea.
+Error al convertir la linea 7 a entero
+El numero de la linea 8 es: 123
+```
+    
 # Conclusión
 
 En C++, es muy posible encontrarse con que se devuelva un valor null, como por ejemplo al no cubrir todas las ramas de return que pueda tener una función.

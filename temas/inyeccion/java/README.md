@@ -1,6 +1,6 @@
 # Ejecución del programa
 
-He ejecutado el programa corriendo PruebaReceta.java desde VisualStudio dentro del proyecto Maven. Imagino que se podrían usar otros IDEs como Eclipse.
+Situandose en la misma carpeta que el pom.xml y la carpeta src, ejecutar la siguiente orden: _mvn compile exec:java -Dexec.mainClass="com.uca.iiss.PruebaReceta"_
 
 # Explicación del código
 

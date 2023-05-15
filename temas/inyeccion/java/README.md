@@ -1,6 +1,10 @@
 # Ejecución del programa
 
-Situandose en la misma carpeta que el pom.xml y la carpeta src, ejecutar la siguiente orden: _mvn compile exec:java -Dexec.mainClass="com.uca.iiss.PruebaReceta"_
+Situandose en la misma carpeta que el pom.xml y la carpeta src, ejecutar la siguiente orden: 
+
+```
+mvn compile exec:java -Dexec.mainClass="com.uca.iiss.PruebaReceta"
+```
 
 # Explicación del código
 

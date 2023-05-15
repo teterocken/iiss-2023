@@ -44,13 +44,13 @@ print(excursion._destino)
 
 # Aunque teoricamente con la clase con atributos protected no debería poderse
 # acceder y modificar los miembros, Python no lo prohibe, aunque si que existe un weak warning
-
+"""
 excursion = Excursionprivada('Puerto Real', 'Jerez')
 print(excursion.__monitor)
 print(excursion.__destino)
 excursion.__destino = 'Sevilla'
 print(excursion.__destino)
-
+"""
 # En el caso de la clase con miembros privados no se puede ni acceder ni modificar
 # los miembros, he dejado las líneas comentadas, puesto que provoca un fallo el intentarlo
 
@@ -73,7 +73,7 @@ class Calculadora:
 
 C1 = Calculadora("Casio")
 print(C1.multiplicar(4, 5))
-print(C1.__sumar(4, 5))
+# print(C1.__sumar(4, 5))
 
 
 # Ocultación de operaciones/métodos

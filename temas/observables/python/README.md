@@ -15,10 +15,15 @@ class Observer:
         self.observables = {}
 
     def observe(self, nombre_evento, callback):
-        self.observables[nombre_evento] = callback
+        self.observables[nombre_evento] = Subject()
+        self.observables[nombre_evento].subscribe(callback)
+
+    def notify(self, nombre_evento, data):
+        if nombre_evento in self.observables:
+            self.observables[nombre_evento].on_next(data)
 ```
 
-Tras esto, se crea una clase Evento, que guarda el nombre del evento, y los datos asociados a este nombre. Además, dispara una función que mira dentro de los observables de cada observer, si alguno está esperando la actualización del evento que tenga su nombre, para así actualizarlo con los datos asociados a este:
+Tras esto, se crea una clase Evento, que guarda el nombre del evento, y los datos asociados a este nombre. Además, dispara una función que notifica a los observables, si alguno está esperando la actualización del evento que tenga su nombre, para así actualizarlo con los datos asociados a este:
 
 ```python
 class Evento:
@@ -30,8 +35,7 @@ class Evento:
 
     def fire(self):
         for observer in Observer.observers:
-            if self.nombre in observer.observables:
-                observer.observables[self.nombre](self.data)
+            observer.notify(self.nombre, self.data)
 ```
 
 Tras esto se crean las siguientes clases, que serán dos Concrete Observers, uno que representa el observer que espera la actualización del evento de qué película le indica que quiere ver el cliente, y otro que espera el número de entradas que pedirá:
@@ -81,4 +85,6 @@ Ha pedido Tres entradas.
 
 # Conclusión
 
-Es muy sencillo implementar el patrón Observer en Python y añadirle la funcionalidad de los observables- Esto nos permite crear código como el del ejemplo, que permitirá una programación orientada a eventos un tanto rudimentaria gracias a la clase Evento, lo cual permite el uso de observables para poder actualizar al Concrete Observer cuando sea posible con los datos del correspondiente evento.
+Es muy sencillo implementar el patrón Observer en Python y añadirle la funcionalidad de los observables. Esto nos permite crear código como el del ejemplo, que permitirá una programación orientada a eventos un tanto rudimentaria gracias a la clase Evento, lo cual permite el uso de observables para poder actualizar al Concrete Observer cuando sea posible con los datos del correspondiente evento.
+
+Respecto a la biblioteca de reactive programming Rx, se utiliza el método Subject(), un Subject es una clase que actua como observable y como observer a la vez, y se le pueden suscribir los suscribers. El método on_next se encargará de notificar a los suscritos a un evento con la actualización de contenido del mismo.
